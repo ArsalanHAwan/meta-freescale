@@ -21,20 +21,20 @@ LIC_FILES_CHKSUM = " \
     file://../etna_viv/LICENSE;md5=9d4853905d85f044ed013e75def30a76 \
     "
 
-SRCREV_armada = "78e7116a5bc6cdd9f93cbf1552d342933623ab59"
-SRCREV_etna = "8478eef32fd911ebb300c970071e22227afa1896"
+SRCREV:armada = "78e7116a5bc6cdd9f93cbf1552d342933623ab59"
+SRCREV:etna = "8478eef32fd911ebb300c970071e22227afa1896"
 SRCREV_FORMAT = "armada_etna"
 
 PV = "0.1+git${SRCPV}"
 
 SRC_URI = " \
     git://git.arm.linux.org.uk/cgit/xf86-video-armada.git;branch=unstable-devel;protocol=http;name=armada \
-    git://github.com/etnaviv/etna_viv.git;protocol=https;name=etna;destsuffix=etna_viv \
+    git://github.com/etnaviv/etna_viv.git;protocol=https;name=etna;destsuffix=etna_viv;branch=master \
     "
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "xserver-xorg-module-exa \
+RDEPENDS:${PN} = "xserver-xorg-module-exa \
                   xserver-xorg-extension-dri \
                   xserver-xorg-extension-dri2 \
                   xserver-xorg-extension-glx \

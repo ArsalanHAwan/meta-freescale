@@ -4,7 +4,7 @@
 SUMMARY = "Installs i.MX-specific kernel headers"
 DESCRIPTION = "Installs i.MX-specific kernel headers to userspace. \
 New headers are installed in ${includedir}/imx."
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 SRCBRANCH = "imx_5.4.47_2.2.0"
@@ -64,7 +64,7 @@ do_install() {
 # Without this setting the RDEPENDS in other recipes fails to find this
 # package, therefore causing the -dev package also to be skipped effectively not
 # populating it into SDK
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS += "unifdef-native bison-native rsync-native"
@@ -74,4 +74,4 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 # Restrict this recipe to NXP BSP only, this recipe is not compatible
 # with mainline BSP
 COMPATIBLE_HOST = '(null)'
-COMPATIBLE_HOST_use-nxp-bsp = '.*'
+COMPATIBLE_HOST:use-nxp-bsp = '.*'

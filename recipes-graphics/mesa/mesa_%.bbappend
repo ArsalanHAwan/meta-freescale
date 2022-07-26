@@ -1,8 +1,8 @@
-PROVIDES_remove_imxgpu   = "virtual/egl"
-PROVIDES_remove_imxgpu3d = "virtual/libgl virtual/libgles1 virtual/libgles2"
+PROVIDES:remove_imxgpu   = "virtual/egl"
+PROVIDES:remove_imxgpu3d = "virtual/libgl virtual/libgles1 virtual/libgles2"
 
-PACKAGECONFIG_remove_imxgpu   = "egl gbm"
-PACKAGECONFIG_remove_imxgpu3d = "gles"
+PACKAGECONFIG:remove_imxgpu   = "egl gbm"
+PACKAGECONFIG:remove_imxgpu3d = "gles"
 
 # FIXME: mesa should support 'x11-no-tls' option
 python () {
@@ -15,19 +15,19 @@ python () {
 }
 
 # Enable Etnaviv and Freedreno support
-PACKAGECONFIG_append_use-mainline-bsp = " gallium etnaviv kmsro freedreno"
+PACKAGECONFIG:append_use-mainline-bsp = " gallium etnaviv kmsro freedreno"
 
 USE_OSMESA_ONLY ?= "no"
 
 # Etnaviv support state for i.MX8 is unknown, therefore only enable OSMesa and
 # disable Gallium for now. If you still want to enable Etnaviv, just set
-# USE_OSMESA_ONLY_mx8 = "no" in your bbappend.
-USE_OSMESA_ONLY_mx8 ?= "yes"
+# USE_OSMESA_ONLY:mx8 = "no" in your bbappend.
+USE_OSMESA_ONLY:mx8 ?= "yes"
 
 # Enable OSMesa which also requires dri (classic) swrast
-PACKAGECONFIG_append = " ${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', ' osmesa', '', d)}"
-PACKAGECONFIG_remove = " ${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', 'gallium', '', d)}"
-DRIDRIVERS_append = "${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', 'swrast', '', d)}"
+PACKAGECONFIG:append = " ${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', ' osmesa', '', d)}"
+PACKAGECONFIG:remove = " ${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', 'gallium', '', d)}"
+DRIDRIVERS:append = "${@oe.utils.conditional('USE_OSMESA_ONLY', 'yes', 'swrast', '', d)}"
 
 BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
@@ -35,7 +35,7 @@ BACKEND = \
                                                              'fb', d), d)}"
 
 # FIXME: Dirty hack to allow use of Vivante GPU libGL binary
-do_install_append_imxgpu3d () {
+do_install:append_imxgpu3d () {
     rm -f ${D}${libdir}/libGL.* \
           ${D}${includedir}/GL/gl.h \
           ${D}${includedir}/GL/glcorearb.h \
@@ -47,6 +47,6 @@ do_install_append_imxgpu3d () {
     fi
 }
 
-do_install_append_imxgpu () {
+do_install:append_imxgpu () {
     rm -rf ${D}${includedir}/KHR
 }

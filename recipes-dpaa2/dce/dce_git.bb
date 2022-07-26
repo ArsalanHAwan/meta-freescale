@@ -7,7 +7,7 @@ SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/dce;nobra
       git://source.codeaurora.org/external/qoriq/qoriq-components/qbman_userspace;nobranch=1;name=qbman;destsuffix=git/lib/qbman_userspace \
 "
 SRCREV = "0ec35ad12ad04b5dadfa9f8c8a718c715bde41db"
-SRCREV_qbman = "a1af1e1528fe2e1ce0df1e6d9170b6c239c8ab4f"
+SRCREV:qbman = "a1af1e1528fe2e1ce0df1e6d9170b6c239c8ab4f"
 
 S = "${WORKDIR}/git"
 
@@ -17,5 +17,5 @@ do_install () {
     oe_runmake install DESTDIR=${D}
 }
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"
 COMPATIBLE_MACHINE = "(qoriq-arm64)"

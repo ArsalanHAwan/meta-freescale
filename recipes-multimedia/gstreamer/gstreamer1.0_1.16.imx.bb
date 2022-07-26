@@ -4,7 +4,7 @@ It supports a wide range of formats including mp3, ogg, avi, mpeg and quicktime.
 HOMEPAGE = "http://gstreamer.freedesktop.org/"
 BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=Gstreamer"
 SECTION = "multimedia"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0-or-later"
 
 DEPENDS = "glib-2.0 glib-2.0-native libcap libxml2 bison-native flex-native"
 
@@ -72,13 +72,13 @@ GIR_MESON_DISABLE_FLAG = "disabled"
 PACKAGES += "${PN}-bash-completion"
 
 # Add the core element plugins to the main package
-FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
-FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.a ${libdir}/gstreamer-1.0/include"
-FILES_${PN}-bash-completion += "${datadir}/bash-completion/completions/ ${datadir}/bash-completion/helpers/gst*"
-FILES_${PN}-dbg += "${datadir}/gdb ${datadir}/gstreamer-1.0/gdb ${datadir}/glib-2.0/gdb"
+FILES:${PN} += "${libdir}/gstreamer-1.0/*.so"
+FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.a ${libdir}/gstreamer-1.0/include"
+FILES:${PN}-bash-completion += "${datadir}/bash-completion/completions/ ${datadir}/bash-completion/helpers/gst*"
+FILES:${PN}-dbg += "${datadir}/gdb ${datadir}/gstreamer-1.0/gdb ${datadir}/glib-2.0/gdb"
 
 CVE_PRODUCT = "gstreamer"
 
-require recipes-multimedia/gstreamer/gstreamer1.0-ptest.inc
+require gstreamer1.0-ptest.inc
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

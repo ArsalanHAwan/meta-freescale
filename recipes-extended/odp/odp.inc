@@ -6,7 +6,7 @@ SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ca6103dc75397fb6bec596187d6b7829"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/odp:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/odp:"
 
 SRC_URI = " \
 git://source.codeaurora.org/external/qoriq/qoriq-components/odp;nobranch=1 \
@@ -18,8 +18,8 @@ SRC_URI += "file://0001-Fix-this-build-error.patch"
 
 SRCREV = "0bda2c9736a72ef41a411e193bc31487ecce6731"
 
-SRCREV_qbman = "75ff61a7ca6acdbdbb780161b053cbcbc990f1be"
-SRCREV_rta = "bbab28b03ae21c52ce913f8b052acf53bd24ff5d"
+SRCREV:qbman = "75ff61a7ca6acdbdbb780161b053cbcbc990f1be"
+SRCREV:rta = "bbab28b03ae21c52ce913f8b052acf53bd24ff5d"
 
 S = "${WORKDIR}/git"
 

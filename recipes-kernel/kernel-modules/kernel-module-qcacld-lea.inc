@@ -1,8 +1,8 @@
 SUMMARY = "Qualcomm WiFi driver for QCA module 9377 and 6174"
-LICENSE = "BSD & GPLv2"
+LICENSE = "BSD & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=20;md5=ec8d62116b13db773825ebf7cf91be1d;"
 
-QCACLD_SRC ?= "git://source.codeaurora.org/external/imx/qcacld-2.0-imx.git;protocol=https"
+QCACLD_SRC ?= "git://source.codeaurora.org/external/imx/qcacld-2.0-imx.git;protocol=https;branch=master"
 SRC_URI = "${QCACLD_SRC};branch=IMX_CNSS.LEA.NRT_3.0_KRL5.4"
 SRCREV = "7dc91e5977f31d60741c55682564788c0f930163"
 
@@ -20,4 +20,4 @@ EXTRA_OEMAKE += " \
 "
 
 COMPATIBLE_MACHINE = "(imx)"
-COMPATIBLE_HOST_libc-musl = 'null'
+COMPATIBLE_HOST:libc-musl = 'null'

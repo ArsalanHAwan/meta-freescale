@@ -12,12 +12,12 @@ S = "${WORKDIR}/git"
 inherit cmake pkgconfig perlnative python3native
 
 PACKAGECONFIG ??= "egl"
-PACKAGECONFIG_append = \
+PACKAGECONFIG:append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' x11', \
                                                         '', d), d)}"
-PACKAGECONFIG_append_mx8 = " waffle"
-PACKAGECONFIG_append_imxgpu2d = " vivante"
+PACKAGECONFIG:append_mx8 = " waffle"
+PACKAGECONFIG:append_imxgpu2d = " vivante"
 
 PACKAGECONFIG[egl] = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF,virtual/egl"
 PACKAGECONFIG[gui] = "-DENABLE_GUI=ON,-DENABLE_GUI=OFF"
@@ -28,7 +28,7 @@ PACKAGECONFIG[vivante] = "-DENABLE_VIVANTE=ON,-DENABLE_VIVANTE=OFF,virtual/libg2
 
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/apitrace/scripts/* \
     ${libdir}/apitrace/wrappers/* \
 "

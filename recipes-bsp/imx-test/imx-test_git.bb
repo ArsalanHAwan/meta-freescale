@@ -5,13 +5,13 @@
 SUMMARY = "Test programs for i.MX BSP"
 DESCRIPTION = "Unit tests for the i.MX BSP"
 SECTION = "base"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 DEPENDS = "alsa-lib libdrm"
-DEPENDS_append_mx6 = " imx-lib"
-DEPENDS_append_mx7 = " imx-lib"
-DEPENDS_append_imxvpu = " virtual/imxvpu"
+DEPENDS:append_mx6 = " imx-lib"
+DEPENDS:append_mx7 = " imx-lib"
+DEPENDS:append_imxvpu = " virtual/imxvpu"
 
 PE = "1"
 PV = "7.0+${SRCPV}"
@@ -30,21 +30,21 @@ inherit module-base use-imx-headers
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-PLATFORM_mx6q  = "IMX6Q"
-PLATFORM_mx6dl = "IMX6Q"
-PLATFORM_mx6sl = "IMX6SL"
-PLATFORM_mx6sll = "IMX6SL"
-PLATFORM_mx6sx = "IMX6SX"
-PLATFORM_mx6ul = "IMX6UL"
-PLATFORM_mx7d  = "IMX7D"
-PLATFORM_mx7ulp = "IMX7D"
-PLATFORM_mx8 = "IMX8"
+PLATFORM:mx6q  = "IMX6Q"
+PLATFORM:mx6dl = "IMX6Q"
+PLATFORM:mx6sl = "IMX6SL"
+PLATFORM:mx6sll = "IMX6SL"
+PLATFORM:mx6sx = "IMX6SX"
+PLATFORM:mx6ul = "IMX6UL"
+PLATFORM:mx7d  = "IMX7D"
+PLATFORM:mx7ulp = "IMX7D"
+PLATFORM:mx8 = "IMX8"
 
 PARALLEL_MAKE = "-j 1"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-PACKAGECONFIG_append_imxvpu = " vpu"
+PACKAGECONFIG:append_imxvpu = " vpu"
 
 PACKAGECONFIG[x11] = ",,libx11 libxdamage libxrender libxrandr"
 PACKAGECONFIG[vpu] = "HAS_VPU=true,HAS_VPU=false,virtual/imxvpu"
@@ -75,7 +75,7 @@ do_install() {
     install -m 0644 ${WORKDIR}/memtool_profile ${D}/home/root/.profile
 }
 
-FILES_${PN} += "/unit_tests /home/root/.profile"
-RDEPENDS_${PN} = "bash"
+FILES:${PN} += "/unit_tests /home/root/.profile"
+RDEPENDS:${PN} = "bash"
 
-FILES_${PN}-dbg += "/unit_tests/.debug"
+FILES:${PN}-dbg += "/unit_tests/.debug"

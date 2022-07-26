@@ -3,22 +3,22 @@
 require imx-mkimage_git.inc
 
 DESCRIPTION = "Generate Boot Loader for i.MX 8 device"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
 inherit use-imx-security-controller-firmware
 
 IMX_EXTRA_FIRMWARE      = "firmware-imx-8 imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE_mx8m = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE_mx8x = "imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE:mx8m = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE:mx8x = "imx-sc-firmware imx-seco"
 DEPENDS += " \
     u-boot \
     ${IMX_EXTRA_FIRMWARE} \
     imx-atf \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
 "
-DEPENDS_append_mx8m = " u-boot-mkimage-native dtc-native"
+DEPENDS:append_mx8m = " u-boot-mkimage-native dtc-native"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
@@ -39,16 +39,16 @@ do_compile[depends] += " \
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
 ATF_MACHINE_NAME ?= "bl31-imx8qm.bin"
-ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
-ATF_MACHINE_NAME_mx8x  = "bl31-imx8qx.bin"
-ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
-ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
-ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
-ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
-ATF_MACHINE_NAME_mx8phantomdxl = "bl31-imx8qx.bin"
-ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
-ATF_MACHINE_NAME_mx8dx = "bl31-imx8dx.bin"
-ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
+ATF_MACHINE_NAME:mx8qm = "bl31-imx8qm.bin"
+ATF_MACHINE_NAME:mx8x  = "bl31-imx8qx.bin"
+ATF_MACHINE_NAME:mx8mq = "bl31-imx8mq.bin"
+ATF_MACHINE_NAME:mx8mm = "bl31-imx8mm.bin"
+ATF_MACHINE_NAME:mx8mn = "bl31-imx8mn.bin"
+ATF_MACHINE_NAME:mx8mp = "bl31-imx8mp.bin"
+ATF_MACHINE_NAME:mx8phantomdxl = "bl31-imx8qx.bin"
+ATF_MACHINE_NAME:mx8dxl = "bl31-imx8dxl.bin"
+ATF_MACHINE_NAME:mx8dx = "bl31-imx8dx.bin"
+ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
@@ -56,15 +56,15 @@ BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
 TOOLS_NAME ?= "mkimage_imx8"
 
 SOC_TARGET       ?= "INVALID"
-SOC_TARGET_mx8qm  = "iMX8QM"
-SOC_TARGET_mx8x   = "iMX8QX"
-SOC_TARGET_mx8mq  = "iMX8M"
-SOC_TARGET_mx8mm  = "iMX8MM"
-SOC_TARGET_mx8mn  = "iMX8MN"
-SOC_TARGET_mx8mp  = "iMX8MP"
-SOC_TARGET_mx8dxl = "iMX8DXL"
-SOC_TARGET_mx8phantomdxl = "iMX8QX"
-SOC_TARGET_mx8dx  = "iMX8DX"
+SOC_TARGET:mx8qm  = "iMX8QM"
+SOC_TARGET:mx8x   = "iMX8QX"
+SOC_TARGET:mx8mq  = "iMX8M"
+SOC_TARGET:mx8mm  = "iMX8MM"
+SOC_TARGET:mx8mn  = "iMX8MN"
+SOC_TARGET:mx8mp  = "iMX8MP"
+SOC_TARGET:mx8dxl = "iMX8DXL"
+SOC_TARGET:mx8phantomdxl = "iMX8QX"
+SOC_TARGET:mx8dx  = "iMX8DX"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -74,16 +74,16 @@ IMXBOOT_TARGETS ?= \
                                                   'flash_multi_cores flash_dcd', d), d)}"
 
 BOOT_STAGING       = "${S}/${SOC_TARGET}"
-BOOT_STAGING_mx8m  = "${S}/iMX8M"
-BOOT_STAGING_mx8dx = "${S}/iMX8QX"
+BOOT_STAGING:mx8m  = "${S}/iMX8M"
+BOOT_STAGING:mx8dx = "${S}/iMX8QX"
 
 SOC_FAMILY      = "INVALID"
-SOC_FAMILY_mx8  = "mx8"
-SOC_FAMILY_mx8m = "mx8m"
-SOC_FAMILY_mx8x = "mx8x"
+SOC_FAMILY:mx8  = "mx8"
+SOC_FAMILY:mx8m = "mx8m"
+SOC_FAMILY:mx8x = "mx8x"
 
 REV_OPTION ?= ""
-REV_OPTION_mx8qxpc0 = "REV=C0"
+REV_OPTION:mx8qxpc0 = "REV=C0"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
@@ -213,6 +213,6 @@ do_deploy() {
 addtask deploy before do_build after do_compile
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-FILES_${PN} = "/boot"
+FILES:${PN} = "/boot"
 
 COMPATIBLE_MACHINE = "(mx8)"

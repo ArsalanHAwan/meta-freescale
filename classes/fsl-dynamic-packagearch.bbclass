@@ -16,12 +16,12 @@
 #
 # To use the class, specify, for example:
 #
-# MACHINE_SOCARCH_SUFFIX_soc = "-soc"
+# MACHINE_SOCARCH_SUFFIX:soc = "-soc"
 #
 # and the need filters, as:
 #
 # MACHINE_ARCH_FILTER = "virtual/kernel"
-# MACHINE_SOCARCH_FILTER_soc = "virtual/libgles1 ... virtual/libgl"
+# MACHINE_SOCARCH_FILTER:soc = "virtual/libgles1 ... virtual/libgl"
 #
 # Copyright 2013-2016 (C) O.S. Systems Software LTDA.
 

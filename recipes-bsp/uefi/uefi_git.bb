@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://NXP-Binary-EULA;md5=343ec8f06efc37467a6de53686fa6315"
 
 inherit deploy
 
-SRC_URI = "git://github.com/NXP/qoriq-uefi-binary.git;nobranch=1"
+SRC_URI = "git://github.com/NXP/qoriq-uefi-binary.git;nobranch=1;protocol=https"
 SRCREV= "e95ed52322f15437f98dee2b27de45a7495d648c"
 
 S = "${WORKDIR}/git"
@@ -28,7 +28,7 @@ do_deploy () {
 addtask deploy before do_build after do_install
 
 PACKAGES += "${PN}-image"
-FILES_${PN}-image += "/uefi/*"
+FILES:${PN}-image += "/uefi/*"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 

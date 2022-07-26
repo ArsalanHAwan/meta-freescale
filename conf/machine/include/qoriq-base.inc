@@ -28,9 +28,9 @@ MACHINEOVERRIDES =. "use-${QORIQ_DEFAULT_BSP}-bsp:"
 
 # Sub-architecture support
 MACHINE_SOCARCH_SUFFIX ?= ""
-MACHINE_SOCARCH_SUFFIX_qoriq = "-qoriq"
+MACHINE_SOCARCH_SUFFIX:qoriq = "-qoriq"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-MACHINE_SOCARCH_FILTER_append_qoriq = " cryptodev-qoriq-linux cryptodev-qoriq-module cryptodev-qoriq-test"
+MACHINE_SOCARCH_FILTER:append_qoriq = " cryptodev-qoriq-linux cryptodev-qoriq-module cryptodev-qoriq-test"
 
 INHERIT += "fsl-dynamic-packagearch"

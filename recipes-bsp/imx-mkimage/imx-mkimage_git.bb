@@ -4,16 +4,16 @@
 require imx-mkimage_git.inc
 
 DESCRIPTION = "i.MX make image"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
-inherit native deploy
+inherit deploy native
 
 CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR} -L ${STAGING_LIBDIR}"
 
 REV_CHIP ?= "B0"
-REV_CHIP_mx8qxpc0 = "C0"
+REV_CHIP:mx8qxpc0 = "C0"
 
 do_compile () {
     cd ${S}

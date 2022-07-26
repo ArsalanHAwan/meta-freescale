@@ -5,12 +5,12 @@
 #
 # To indicate that a SoC contains following set of overrides, you can use:
 #
-# MACHINEOVERRIDES_EXTENDER_soc = "group1:group2"
+# MACHINEOVERRIDES_EXTENDER:soc = "group1:group2"
 #
 # However to indicate that an override replaces a set of other
 # overrides, you can use:
 #
-# MACHINEOVERRIDES_EXTENDER_FILTER_OUT_override = "group1 group2"
+# MACHINEOVERRIDES_EXTENDER_FILTER_OUT:override = "group1 group2"
 #
 # Copyright 2016-2018 (C) O.S. Systems Software LTDA.
 

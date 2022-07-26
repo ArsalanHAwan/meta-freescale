@@ -1,6 +1,6 @@
 HOMEPAGE = "http://cryptodev-linux.org/"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 python() {
@@ -8,9 +8,9 @@ python() {
     pkgs = d.getVar('PACKAGES').split()
     for p in pkgs:
         if '-qoriq' in p:
-            d.appendVar("RPROVIDES_" + p, ' ' + p.replace('-qoriq', ''))
-            d.appendVar("RCONFLICTS_" + p, ' ' + p.replace('-qoriq', ''))
-            d.appendVar("RREPLACES_" + p, ' ' + p.replace('-qoriq', ''))
+            d.appendVar("RPROVIDES:" + p, ' ' + p.replace('-qoriq', ''))
+            d.appendVar("RCONFLICTS:" + p, ' ' + p.replace('-qoriq', ''))
+            d.appendVar("RREPLACES:" + p, ' ' + p.replace('-qoriq', ''))
 }
 
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/cryptodev-linux;protocol=https;nobranch=1"

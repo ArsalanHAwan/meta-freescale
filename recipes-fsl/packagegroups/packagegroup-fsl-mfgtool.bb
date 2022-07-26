@@ -18,9 +18,9 @@ PACKAGES = " \
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 
 # Distro can override the following VIRTUAL-RUNTIME providers:
-VIRTUAL-RUNTIME_keymaps ?= "keymaps"
+VIRTUAL-RUNTIME:keymaps ?= "keymaps"
 
-RDEPENDS_${PN}-base = " \
+RDEPENDS:${PN}-base = " \
     bash \
     imx-uuc \
     util-linux \
@@ -30,18 +30,18 @@ RDEPENDS_${PN}-base = " \
     base-files \
     base-passwd \
     busybox \
-    ${@bb.utils.contains("MACHINE_FEATURES", "keyboard", "${VIRTUAL-RUNTIME_keymaps}", "", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "keyboard", "${VIRTUAL-RUNTIME:keymaps}", "", d)} \
     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
 "
 
-RDEPENDS_${PN}-mtd = " \
+RDEPENDS:${PN}-mtd = " \
     ${PN}-base \
     imx-kobs \
     mtd-utils \
     mtd-utils-ubifs \
 "
 
-RDEPENDS_${PN}-extfs = " \
+RDEPENDS:${PN}-extfs = " \
     ${PN}-base \
     e2fsprogs-mke2fs \
     e2fsprogs-e2fsck \

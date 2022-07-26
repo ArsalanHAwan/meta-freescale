@@ -7,7 +7,7 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 inherit deploy
 
-SRC_URI = "git://github.com/NXP/qoriq-engine-pfe-bin.git;nobranch=1"
+SRC_URI = "git://github.com/NXP/qoriq-engine-pfe-bin.git;nobranch=1;protocol=https"
 SRCREV = "d3a8ef0760c54ddc243039c86389497e37be90ab"
 
 S = "${WORKDIR}/git"
@@ -27,8 +27,8 @@ do_deploy () {
 
 addtask deploy after do_install
 
-FILES_${PN} += "/lib/firmware /boot/"
-INSANE_SKIP_${PN} += "arch already-stripped"
+FILES:${PN} += "/lib/firmware /boot/"
+INSANE_SKIP:${PN} += "arch already-stripped"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 

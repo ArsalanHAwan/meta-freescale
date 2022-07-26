@@ -1,10 +1,10 @@
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
 
-LICENSE = "GPLv2+ & LGPLv2+"
+LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
                     file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=a4e1830fce078028c8f0974161272607"
 
-GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
+GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https;branch=master"
 SRCBRANCH = "MM_04.05.05_2005_L5.4.24"
 SRCREV = "cad00a3c4318c787c9661990e8f9328e4a69a329"
 SRC_URI = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
@@ -19,7 +19,7 @@ SRC_URI = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
 S = "${WORKDIR}/git"
 
 DEPENDS += "iso-codes util-linux zlib"
-DEPENDS_append_imxgpu2d = " virtual/libg2d"
+DEPENDS:append_imxgpu2d = " virtual/libg2d"
 
 inherit use-imx-headers gobject-introspection gtk-doc
 
@@ -83,8 +83,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 GTKDOC_MESON_ENABLE_FLAG = "enabled"
 GTKDOC_MESON_DISABLE_FLAG = "disabled"
 
-FILES_${PN} += "${libdir}/gstreamer-1.0/include"
-FILES_${MLPREFIX}libgsttag-1.0 += "${datadir}/gst-plugins-base/1.0/license-translations.dict"
+FILES:${PN} += "${libdir}/gstreamer-1.0/include"
+FILES:${MLPREFIX}libgsttag-1.0 += "${datadir}/gst-plugins-base/1.0/license-translations.dict"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 

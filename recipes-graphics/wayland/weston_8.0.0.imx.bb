@@ -75,7 +75,7 @@ PACKAGECONFIG[remoting] = "-Dremoting=true,-Dremoting=false,gstreamer-1.0"
 # Weston with PAM support
 PACKAGECONFIG[pam] = "-Dpam=true,-Dpam=false,libpam"
 
-do_install_append() {
+do_install:append() {
 	# Weston doesn't need the .la files to load modules, so wipe them
 	rm -f ${D}/${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.la
 
@@ -100,23 +100,23 @@ do_install_append() {
 PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland', '', d)} \
              libweston-${WESTON_MAJOR_VERSION} ${PN}-examples"
 
-FILES_${PN}-dev += "${libdir}/${BPN}/libexec_weston.so"
-FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so* ${datadir}"
+FILES:${PN}-dev += "${libdir}/${BPN}/libexec_weston.so"
+FILES:${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so* ${datadir}"
 
-FILES_libweston-${WESTON_MAJOR_VERSION} = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.so"
-SUMMARY_libweston-${WESTON_MAJOR_VERSION} = "Helper library for implementing 'wayland window managers'."
+FILES:libweston-${WESTON_MAJOR_VERSION} = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.so"
+SUMMARY:libweston-${WESTON_MAJOR_VERSION} = "Helper library for implementing 'wayland window managers'."
 
-FILES_${PN}-examples = "${bindir}/*"
+FILES:${PN}-examples = "${bindir}/*"
 
-FILES_${PN}-xwayland = "${libdir}/libweston-${WESTON_MAJOR_VERSION}/xwayland.so"
-RDEPENDS_${PN}-xwayland += "xserver-xorg-xwayland"
+FILES:${PN}-xwayland = "${libdir}/libweston-${WESTON_MAJOR_VERSION}/xwayland.so"
+RDEPENDS:${PN}-xwayland += "xserver-xorg-xwayland"
 
-RDEPENDS_${PN} += "xkeyboard-config"
-RRECOMMENDS_${PN} = "weston-init liberation-fonts"
-RRECOMMENDS_${PN}-dev += "wayland-protocols"
+RDEPENDS:${PN} += "xkeyboard-config"
+RRECOMMENDS:${PN} = "weston-init liberation-fonts"
+RRECOMMENDS:${PN}-dev += "wayland-protocols"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system weston-launch"
+GROUPADD_PARAM:${PN} = "--system weston-launch"
 
 ########### End of OE-core copy ###########
 
@@ -138,23 +138,23 @@ S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
 REQUIRED_DISTRO_FEATURES          = "opengl"
-REQUIRED_DISTRO_FEATURES_imxgpu2d = ""
-REQUIRED_DISTRO_FEATURES_imxgpu3d = "opengl"
+REQUIRED_DISTRO_FEATURES:imxgpu2d = ""
+REQUIRED_DISTRO_FEATURES:imxgpu3d = "opengl"
 PACKAGECONFIG_OPENGL              = "opengl"
-PACKAGECONFIG_OPENGL_imxgpu2d     = ""
-PACKAGECONFIG_OPENGL_imxgpu3d     = "opengl"
+PACKAGECONFIG_OPENGL:imxgpu2d     = ""
+PACKAGECONFIG_OPENGL:imxgpu3d     = "opengl"
 
-PACKAGECONFIG_remove = "wayland x11"
-PACKAGECONFIG_append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
+PACKAGECONFIG:remove = "wayland x11"
+PACKAGECONFIG:append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
 
-PACKAGECONFIG_remove_imxfbdev = "kms"
-PACKAGECONFIG_append_imxfbdev = " fbdev clients"
-PACKAGECONFIG_append_imxgpu   = " imxgpu"
-PACKAGECONFIG_append_imxgpu2d = " imxg2d"
+PACKAGECONFIG:remove_imxfbdev = "kms"
+PACKAGECONFIG:append_imxfbdev = " fbdev clients"
+PACKAGECONFIG:append_imxgpu   = " imxgpu"
+PACKAGECONFIG:append_imxgpu2d = " imxg2d"
 
 # Clients support
 SIMPLE_CLIENTS = "all"
-SIMPLE_CLIENTS_imxfbdev = "damage,im,egl,shm,touch,dmabuf-v4l"
+SIMPLE_CLIENTS:imxfbdev = "damage,im,egl,shm,touch,dmabuf-v4l"
 PACKAGECONFIG[clients] = "-Dsimple-clients=${SIMPLE_CLIENTS} -Ddemo-clients=true,-Dsimple-clients= -Ddemo-clients=false"
 # Weston with i.MX GPU support
 PACKAGECONFIG[imxgpu] = "-Dimxgpu=true,-Dimxgpu=false,virtual/egl"

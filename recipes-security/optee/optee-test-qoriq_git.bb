@@ -1,7 +1,7 @@
 SUMMARY = "OP-TEE sanity testsuite"
 HOMEPAGE = "https://github.com/qoriq-open-source/optee_test"
 
-LICENSE = "BSD & GPLv2"
+LICENSE = "BSD & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 DEPENDS = "optee-client-qoriq optee-os-qoriq python3-pycrypto-native"
@@ -43,7 +43,7 @@ do_install () {
     install -D -p -m0444 ${S}/out/ta/*/*.ta ${D}/lib/optee_armtz/
 }
 
-FILES_${PN} += "/lib/optee_armtz/"
+FILES:${PN} += "/lib/optee_armtz/"
 
 # Imports machine specific configs from staging to build
 PACKAGE_ARCH = "${MACHINE_ARCH}"

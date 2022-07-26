@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 inherit deploy
 
 DEPENDS += "u-boot-mkimage-native u-boot openssl openssl-native mbedtls rcw cst-native"
-DEPENDS_append_lx2160a += "ddr-phy"
+DEPENDS:append_lx2160a = " ddr-phy"
 do_compile[depends] += "u-boot:do_deploy rcw:do_deploy uefi:do_deploy"
 
 S = "${WORKDIR}/git"
@@ -19,12 +19,12 @@ COMPATIBLE_MACHINE = "(qoriq)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PLATFORM = "${MACHINE}"
-PLATFORM_ls1088ardb-pb = "ls1088ardb"
+PLATFORM:ls1088ardb-pb = "ls1088ardb"
 PLATFORM_ADDITIONAL_TARGET ??= ""
-PLATFORM_ADDITIONAL_TARGET_ls1012afrwy = "ls1012afrwy_512mb"
+PLATFORM_ADDITIONAL_TARGET:ls1012afrwy = "ls1012afrwy_512mb"
 
 RCW_FOLDER ?= "${MACHINE}"
-RCW_FOLDER_ls1088ardb-pb = "ls1088ardb"
+RCW_FOLDER:ls1088ardb-pb = "ls1088ardb"
 
 # requires CROSS_COMPILE set by hand as there is no configure script
 export CROSS_COMPILE="${TARGET_PREFIX}"
@@ -243,5 +243,5 @@ do_deploy() {
     fi
 }
 addtask deploy after do_install
-FILES_${PN} += "/boot"
+FILES:${PN} += "/boot"
 BBCLASSEXTEND = "native nativesdk"

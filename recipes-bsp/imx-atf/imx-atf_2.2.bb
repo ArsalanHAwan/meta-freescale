@@ -21,15 +21,15 @@ inherit deploy
 BOOT_TOOLS = "imx-boot-tools"
 
 PLATFORM        ?= "INVALID"
-PLATFORM_mx8qm   = "imx8qm"
-PLATFORM_mx8x    = "imx8qx"
-PLATFORM_mx8mq   = "imx8mq"
-PLATFORM_mx8mm   = "imx8mm"
-PLATFORM_mx8mn   = "imx8mn"
-PLATFORM_mx8mp   = "imx8mp"
-PLATFORM_mx8dx   = "imx8dx"
-PLATFORM_imx8dxlevk = "imx8dxl"
-PLATFORM_mx8dxlevk-phantom = "imx8qx"
+PLATFORM:mx8qm   = "imx8qm"
+PLATFORM:mx8x    = "imx8qx"
+PLATFORM:mx8mq   = "imx8mq"
+PLATFORM:mx8mm   = "imx8mm"
+PLATFORM:mx8mn   = "imx8mn"
+PLATFORM:mx8mp   = "imx8mp"
+PLATFORM:mx8dx   = "imx8dx"
+PLATFORM:imx8dxlevk = "imx8dxl"
+PLATFORM:mx8dxlevk-phantom = "imx8qx"
 
 EXTRA_OEMAKE += " \
     CROSS_COMPILE="${TARGET_PREFIX}" \
